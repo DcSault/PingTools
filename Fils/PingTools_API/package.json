@@ -1,0 +1,14 @@
+{
+  "name": "suivi-app",
+  "version": "1.0.0",
+  "description": "Application de suivi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.17.1",
+    "fs-extra": "^10.0.0"
+  }
+}

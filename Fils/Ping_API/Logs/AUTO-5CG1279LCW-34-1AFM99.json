@@ -1,0 +1,40 @@
+{
+    "8.8.8.8":  {
+                    "LatenceTotale":  15,
+                    "LatenceMoyenne":  5,
+                    "NombreErreurs":  0,
+                    "NomPoste":  "AUTO-5CG1279LCW",
+                    "Resultats":  [
+                                      {
+                                          "Date":  "2024-01-19T15:47:44.8635555+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "a55ed097-9d91-492f-bf78-feaa01bd72f5",
+                                          "PSShowComputerName":  false
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T15:47:46.3332743+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "af40ab3c-6558-400d-8ceb-c4f4145b2f9a",
+                                          "PSShowComputerName":  false
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T15:47:47.8374380+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "6149582c-b5ed-48ec-9f34-0a93a7577f55",
+                                          "PSShowComputerName":  false
+                                      }
+                                  ],
+                    "NumeroDossier":  "34",
+                    "LatenceMax":  5,
+                    "NombrePings":  3
+                }
+}

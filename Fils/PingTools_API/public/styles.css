@@ -1,0 +1,9 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.suivi {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}

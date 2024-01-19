@@ -1,0 +1,31 @@
+{
+    "8.8.8.8":  {
+                    "LatenceTotale":  11,
+                    "LatenceMoyenne":  6,
+                    "NombreErreurs":  0,
+                    "NomPoste":  "AUTO-5CG1279LCW",
+                    "Resultats":  [
+                                      {
+                                          "Date":  "2024-01-19T13:35:59.6480595+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "e5bb4a09-69fa-488e-afca-a06d0321da7f",
+                                          "PSShowComputerName":  false
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:36:01.6702414+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  6,
+                                          "Adresse":  "8.8.8.8",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "4bbd8693-f0fa-4bc1-becd-69159882f688",
+                                          "PSShowComputerName":  false
+                                      }
+                                  ],
+                    "NumeroDossier":  "34470",
+                    "LatenceMax":  6,
+                    "NombrePings":  2
+                }
+}

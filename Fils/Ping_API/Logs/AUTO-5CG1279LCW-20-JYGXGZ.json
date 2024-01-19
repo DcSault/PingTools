@@ -1,0 +1,42 @@
+{
+    "4.4.4.4":  {
+                    "LatenceTotale":  0,
+                    "LatenceMoyenne":  0,
+                    "NombreErreurs":  1,
+                    "NomPoste":  "AUTO-5CG1279LCW",
+                    "Resultats":  [
+                                      {
+                                          "Date":  "2024-01-19T13:40:01.8523294+01:00",
+                                          "Statut":  "Failed",
+                                          "TempsAllerRetour":  0,
+                                          "Adresse":  "4.4.4.4",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "afa705cf-8e26-4bd8-aeab-adf2a363c32d",
+                                          "PSShowComputerName":  false
+                                      }
+                                  ],
+                    "NumeroDossier":  "20",
+                    "LatenceMax":  0,
+                    "NombrePings":  0
+                },
+    "8.8.8.8":  {
+                    "LatenceTotale":  6,
+                    "LatenceMoyenne":  6,
+                    "NombreErreurs":  0,
+                    "NomPoste":  "AUTO-5CG1279LCW",
+                    "Resultats":  [
+                                      {
+                                          "Date":  "2024-01-19T13:39:57.6919783+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  6,
+                                          "Adresse":  "8.8.8.8",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "019e35de-7f9d-4b31-b6b6-ae951b5fb728",
+                                          "PSShowComputerName":  false
+                                      }
+                                  ],
+                    "NumeroDossier":  "20",
+                    "LatenceMax":  6,
+                    "NombrePings":  1
+                }
+}

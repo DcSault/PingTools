@@ -1,0 +1,42 @@
+{
+    "4":  {
+              "LatenceTotale":  0,
+              "LatenceMoyenne":  0,
+              "NombreErreurs":  1,
+              "NomPoste":  "AUTO-5CG1279LCW",
+              "Resultats":  [
+                                {
+                                    "Date":  "2024-01-19T15:51:48.5364377+01:00",
+                                    "Statut":  "Failed",
+                                    "TempsAllerRetour":  0,
+                                    "Adresse":  "4",
+                                    "PSComputerName":  "localhost",
+                                    "RunspaceId":  "9345ec6c-e959-4f93-ad3d-65d507f6a098",
+                                    "PSShowComputerName":  false
+                                }
+                            ],
+              "NumeroDossier":  "2",
+              "LatenceMax":  0,
+              "NombrePings":  0
+          },
+    "8.8.8.8":  {
+                    "LatenceTotale":  5,
+                    "LatenceMoyenne":  5,
+                    "NombreErreurs":  0,
+                    "NomPoste":  "AUTO-5CG1279LCW",
+                    "Resultats":  [
+                                      {
+                                          "Date":  "2024-01-19T15:51:48.3756807+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "cbe51862-17bf-4ce1-8c0f-666bb07c2c12",
+                                          "PSShowComputerName":  false
+                                      }
+                                  ],
+                    "NumeroDossier":  "2",
+                    "LatenceMax":  5,
+                    "NombrePings":  1
+                }
+}

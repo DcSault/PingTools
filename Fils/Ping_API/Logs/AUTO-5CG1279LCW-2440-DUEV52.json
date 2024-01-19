@@ -1,0 +1,60 @@
+{
+    "8.8.4.4":  {
+                    "LatenceTotale":  14,
+                    "LatenceMoyenne":  7,
+                    "NombreErreurs":  0,
+                    "NomPoste":  "AUTO-5CG1279LCW",
+                    "Resultats":  [
+                                      {
+                                          "Date":  "2024-01-19T15:34:35.6100358+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.4.4",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "2d7b7f84-83ae-499b-b1c4-a7ba9ab7a1af",
+                                          "PSShowComputerName":  false
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T15:34:37.6448169+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  9,
+                                          "Adresse":  "8.8.4.4",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "282da29f-d32f-4841-887c-3a4a080e64b1",
+                                          "PSShowComputerName":  false
+                                      }
+                                  ],
+                    "NumeroDossier":  "2440",
+                    "LatenceMax":  9,
+                    "NombrePings":  2
+                },
+    "8.8.8.8":  {
+                    "LatenceTotale":  11,
+                    "LatenceMoyenne":  6,
+                    "NombreErreurs":  0,
+                    "NomPoste":  "AUTO-5CG1279LCW",
+                    "Resultats":  [
+                                      {
+                                          "Date":  "2024-01-19T15:34:35.4745140+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "943aae3d-b3a4-49fb-ab31-be0b7ceb5a6d",
+                                          "PSShowComputerName":  false
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T15:34:37.3782985+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  6,
+                                          "Adresse":  "8.8.8.8",
+                                          "PSComputerName":  "localhost",
+                                          "RunspaceId":  "16460515-cec8-40d1-866a-e8cf2895b6d5",
+                                          "PSShowComputerName":  false
+                                      }
+                                  ],
+                    "NumeroDossier":  "2440",
+                    "LatenceMax":  6,
+                    "NombrePings":  2
+                }
+}
