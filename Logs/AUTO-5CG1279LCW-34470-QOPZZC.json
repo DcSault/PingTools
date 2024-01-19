@@ -1,0 +1,86 @@
+{
+    "8.8.8.8":  {
+                    "LatenceTotale":  68,
+                    "LatenceMoyenne":  6,
+                    "NombreErreurs":  0,
+                    "NomPoste":  "AUTO-5CG1279LCW",
+                    "Resultats":  [
+                                      {
+                                          "Date":  "2024-01-19T13:17:39.0292003+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:40.0830965+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:41.1065064+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:42.1407916+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  7,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:43.1661712+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  6,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:44.1935450+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:45.2246177+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  6,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:46.2979312+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  7,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:47.3237858+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  6,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:48.3568271+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  6,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:49.3903123+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8"
+                                      },
+                                      {
+                                          "Date":  "2024-01-19T13:17:49.4083093+01:00",
+                                          "Statut":  "Success",
+                                          "TempsAllerRetour":  5,
+                                          "Adresse":  "8.8.8.8"
+                                      }
+                                  ],
+                    "NumeroDossier":  "34470",
+                    "LatenceMax":  7,
+                    "NombrePings":  12,
+                    "DerniereLatence":  5
+                }
+}

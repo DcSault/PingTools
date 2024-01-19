@@ -121,29 +121,3 @@ while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -
     # Pause entre les itérations
     Start-Sleep -Seconds $DelaiEntrePings
 }
-
-# Envoi des informations à l'API à la fin de la boucle
-# Date et heure de fin
-$heureFin = Get-Date
-
-# Préparation des données pour l'API
-$body = @{
-    "NomDuPoste" = $nomPoste
-    "DateDebut" = $heureDebut.ToString("o")  # Format ISO 8601
-    "DateFin" = $heureFin.ToString("o")      # Format ISO 8601
-    "ChaineAleatoire" = $nombreAleatoire
-    "Statut" = "Terminé"
-}
-
-# URL de l'API
-$apiUrl = "https://votre.api/endpoint"
-
-# Envoi de la requête API
-$response = Invoke-RestMethod -Uri $apiUrl -Method Post -Body ($body | ConvertTo-Json) -ContentType "application/json"
-
-# Vérifier et afficher la réponse de l'API
-if ($response.Status -eq "Success") {
-    "Envoi à l'API réussi."
-} else {
-    "Échec de l'envoi à l'API."
-}
