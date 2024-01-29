@@ -15,6 +15,12 @@
 .PARAMETER DelaiEntrePings
     Le délai en secondes entre chaque ping. Par défaut, il est de 1 seconde.
 
+.PARAMETER NumeroDossier
+    Le numéro de dossier à utiliser pour les fichiers de logs. Ce paramètre est facultatif.
+
+.PARAMETER DureeArretSecondes
+    La durée en secondes après laquelle le script doit s'arrêter. Par défaut, le script s'exécute indéfiniment.
+
 .EXAMPLE
     # Pinger google.com et microsoft.com avec un délai de 1 seconde entre les pings
     # Sauvegarder les fichiers journaux dans le répertoire "C:\Logs"
