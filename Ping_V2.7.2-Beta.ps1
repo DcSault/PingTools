@@ -21,13 +21,6 @@
 .PARAMETER DureeArretSecondes
     La durée en secondes après laquelle le script doit s'arrêter. Par défaut, le script s'exécute indéfiniment.
 
-.EXAMPLE
-    # Pinger google.com et microsoft.com avec un délai de 1 seconde entre les pings
-    # Sauvegarder les fichiers journaux dans le répertoire "C:\Logs"
-    # Utiliser le numéro de dossier "12345"
-    # Arrêter le script après 1 heure (3600 secondes)
-    .\Ping_V2.7-Beta.ps1 -NomsHotes "google.com", "microsoft.com" -RepertoireLogs "C:\Logs" -DelaiEntrePings 1 -NumeroDossier "12345" -DureeArretSecondes 3600
-     
 .NOTES
     Version : 2.7 - Beta
     Auteur : V.ROSIQUE
@@ -81,7 +74,9 @@ $dureeArretSecondes = Read-Host -Prompt "Entrez la durée en secondes après laq
 $heureDebut = Get-Date
 
 while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -lt $dureeArretSecondes) {
-    foreach ($NomHote in $NomsHotes) {
+    $NomsHotes | ForEach-Object {
+        $NomHote = $_
+
         try {
             $resultat = Test-Connection -ComputerName $NomHote -Count 1 -ErrorAction Stop
             $statut = "Success"
@@ -121,3 +116,36 @@ while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -
 
     Start-Sleep -Seconds $DelaiEntrePings
 }
+
+
+# SIG # Begin signature block
+# MIIFYQYJKoZIhvcNAQcCoIIFUjCCBU4CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
+# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0Y5Zi2j5VU5X8+a7FIrPPzhH
+# X5WgggMGMIIDAjCCAeqgAwIBAgIQTKtr6ON9MoZCMpLCwj+cCjANBgkqhkiG9w0B
+# AQsFADAQMQ4wDAYDVQQDDAVuZXlsaTAeFw0yNDAxMzAxNTQxMDdaFw0yNTAxMzAx
+# NjAxMDdaMBAxDjAMBgNVBAMMBW5leWxpMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
+# MIIBCgKCAQEA1CSbXRxi+q3mU0kC1amVnfOOjBKpbY+dDn+fTD/ndbqLxzkLPSYb
+# wI6Dx/WQZy0Pp8tr+AJGGWKUrYZwVV8OVvvtp7Ji4VOwc9hvx9JIYdoM+LUEBtKO
+# zKaT+z01TxzayKw7MbWJAdskFYK1IzARyMkHpnMok/BQ1A2MHD1zAWgvJkCxXDrB
+# KK+snLBPCQ8vtFQF0QDx+457O3AL4AOziMCxUwHP9BKAI++jw7bdkEdvttgm803E
+# FIKEiOYuuW2o4RSdm6E0LlAl1fu0R01FwcS1bcNGYWuwO1HA3DgSVkljTymCP9/4
+# sgUnIqGZkJFA8g1ElL93yMzCluPDXj35EQIDAQABo1gwVjAOBgNVHQ8BAf8EBAMC
+# B4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwEAYDVR0RBAkwB4IFbmV5bGkwHQYDVR0O
+# BBYEFPbtH1eAdvytXuxs4uwKkfOez6ZJMA0GCSqGSIb3DQEBCwUAA4IBAQB9eJsz
+# eNNMyhw9UcmavnqhngwbR9VPw0z4Vn7RO9Owsd1Y1g+GMtmbl0L9+Y4iqY3R/SfO
+# ODNCe5hmWjFPGGXgcy7Df13bGKqQ9RGHs/HKHgS47rwwFpHidWcapsYWBHtqvOuZ
+# H6E5+U0ZsOcLpYWohwJKjH6Xgv2NgcZm2ewDXnIUXrbVUaNoKX36rD2CN5ZXpN9n
+# 7fVt3I68h8LZc99o/RC4AY1dye5zkR4m+IGurOvITOkPgcrC8De2+ZlxYBL4V5/I
+# MHLCMfm3EdjBjYL/8JYtRQN3VwmbpGYED1DPHhMp248QulXDkdJL1AxVMDDHcjTD
+# gP4P50DRyU7blpGvMYIBxTCCAcECAQEwJDAQMQ4wDAYDVQQDDAVuZXlsaQIQTKtr
+# 6ON9MoZCMpLCwj+cCjAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAA
+# oQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4w
+# DAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU00qlWLdxlVXtc30JlzKPQqKv
+# diwwDQYJKoZIhvcNAQEBBQAEggEAyYRr5GZTrpDpBMeN/FK1ZblXirr+8Mg+8BBX
+# vRk6Jcd1FpL0t9bQXbSWuA6mbt6SQtboiS7sC7HS4CuWfwNti8yaydUfDUU3fv45
+# adK37Lnj0MmpqOYCTqbIK7E/FWv/cMobjKRetKxb191Ckfkx3dXywPsyy5Jiyb6J
+# Qt49oKyJ4nr3ohJfkFohVkkkYbXZlIS39tF7OoFp44rFIaqpR6lfbDy80JG+y49a
+# HZ3nradGCRkN5rbLe0ZAhDvUloxE4DZuiFWNKZFfRxmFXdPwYW+VFAwdYeAwwZB7
+# bS0zFhaNAYagjffno1rDrGCYcTxLKjyxnpzcvAMfWbBx4dei+Q==
+# SIG # End signature block
