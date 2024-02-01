@@ -2,8 +2,7 @@
 param (
     [Parameter(Mandatory = $true)]
     [string[]] $NomsHotes,
-    [string] $RepertoireLogs = "Logs",
-    [int] $DelaiEntrePings = 1
+    [string] $RepertoireLogs = "Logs"
 )
 
 # Créer le répertoire de logs si nécessaire
@@ -91,6 +90,7 @@ while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -
     $runspaces = foreach ($NomHote in $NomsHotesAccessibles) {
         $powershell = [powershell]::Create().AddScript({
             param($NomHote)
+            $heureDebutPing = Get-Date
             try {
                 $ping = New-Object System.Net.NetworkInformation.Ping
                 $resultat = $ping.Send($NomHote, 1000) # Ajout d'un délai d'expiration de 1000 ms
@@ -104,6 +104,11 @@ while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -
             } catch {
                 $statut = "Failed"
                 $tempsAllerRetour = 0
+            }
+
+            $tempsEcoule = (Get-Date) - $heureDebutPing
+            if ($tempsEcoule.TotalMilliseconds -lt 1000) {
+                Start-Sleep -Milliseconds (1000 - $tempsEcoule.TotalMilliseconds)
             }
 
             # Assurez-vous que l'objet est correctement créé
@@ -159,8 +164,6 @@ while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -
     # Sauvegarde des données dans le fichier log
     $donneesHotes | ConvertTo-Json -Depth 100 | Set-Content -Path $fichierLog
 
-    # Pause entre les itérations
-    Start-Sleep -Seconds $DelaiEntrePings
 }
 
 $runspacePool.Close()
