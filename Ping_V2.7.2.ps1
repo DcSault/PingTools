@@ -90,10 +90,11 @@ while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -
     $runspaces = foreach ($NomHote in $NomsHotesAccessibles) {
         $powershell = [powershell]::Create().AddScript({
             param($NomHote)
-            $heureDebutPing = Get-Date
             try {
-                $ping = New-Object System.Net.NetworkInformation.Ping
-                $resultat = $ping.Send($NomHote, 1000) # Ajout d'un délai d'expiration de 1000 ms
+                $tempsDebut = Measure-Command {
+                    $ping = New-Object System.Net.NetworkInformation.Ping
+                    $resultat = $ping.Send($NomHote, 1000)
+                }
                 if ($resultat.Status -eq "Success") {
                     $statut = "Success"
                     $tempsAllerRetour = $resultat.RoundtripTime
@@ -105,10 +106,10 @@ while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -
                 $statut = "Failed"
                 $tempsAllerRetour = 0
             }
-
-            $tempsEcoule = (Get-Date) - $heureDebutPing
-            if ($tempsEcoule.TotalMilliseconds -lt 1000) {
-                Start-Sleep -Milliseconds (1000 - $tempsEcoule.TotalMilliseconds)
+    
+            $tempsRestant = [math]::Round(1 - $tempsDebut.TotalSeconds, 2)
+            if ($tempsRestant -gt 0) {
+                Start-Sleep -Seconds $tempsRestant 
             }
 
             # Assurez-vous que l'objet est correctement créé
