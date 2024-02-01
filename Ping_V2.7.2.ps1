@@ -15,10 +15,17 @@ $donneesHotes = @{}
 $nomPoste = $env:COMPUTERNAME
 
 # Demande le numéro de dossier
-$numeroDossier = Read-Host -Prompt "Entrez le numéro de dossier"
+do {
+    $numeroDossier = Read-Host -Prompt "Entrez le numéro de dossier"
+    if ($numeroDossier -match "^\d+$") {
+        break
+    } else {
+        Write-Host "Le numéro de dossier doit être un nombre. Veuillez réessayer."
+    }
+} while ($true)
 
 # Fonction pour générer une chaîne aléatoire
-function Generate-RandomString {
+function New-RandomString {
     param (
         [int] $Length
     )
@@ -35,7 +42,7 @@ function Generate-RandomString {
     return $randomString
 }
 
-$nombreAleatoire = Generate-RandomString -Length 6
+$nombreAleatoire = New-RandomString -Length 6
 $nombreAleatoire = $nombreAleatoire.ToUpper()
 $nombreAleatoire = $nombreAleatoire -replace "_", "-"
 
@@ -43,20 +50,34 @@ $nombreAleatoire = $nombreAleatoire -replace "_", "-"
 $fichierLog = Join-Path -Path $RepertoireLogs -ChildPath "${nomPoste}-${numeroDossier}-${nombreAleatoire}.json"
 
 # Initialisation des données pour chaque hôte
+$NomsHotesAccessibles = @()
 foreach ($NomHote in $NomsHotes) {
-    $donneesHotes[$NomHote] = @{
-        "LatenceMax" = 0
-        "NombreErreurs" = 0
-        "LatenceTotale" = 0
-        "NombrePings" = 0
-        "Resultats" = @()
-        "NomPoste" = $nomPoste
-        "NumeroDossier" = $numeroDossier
+    # Vérification de la connectivité de l'hôte
+    if (Test-Connection -ComputerName $NomHote -Count 1 -Quiet) {
+        $donneesHotes[$NomHote] = @{
+            "LatenceMax" = 0
+            "NombreErreurs" = 0
+            "LatenceTotale" = 0
+            "NombrePings" = 0
+            "Resultats" = @()
+            "NomPoste" = $nomPoste
+            "NumeroDossier" = $numeroDossier
+        }
+        $NomsHotesAccessibles += $NomHote
+    } else {
+        Write-Host "L'hôte $NomHote n'est pas accessible. Il sera ignoré."
     }
 }
 
 # Demande de la durée d'exécution du script
-$dureeArretSecondes = Read-Host -Prompt "Entrez la durée en secondes après laquelle le script doit s'arrêter (0 pour une exécution indéfinie)"
+do {
+    $dureeArretSecondes = Read-Host -Prompt "Entrez la durée en secondes après laquelle le script doit s'arrêter (0 pour une exécution indéfinie)"
+    if ($dureeArretSecondes -match "^\d+$" -and $dureeArretSecondes -ge 0) {
+        break
+    } else {
+        Write-Host "La durée doit être un nombre positif ou zéro. Veuillez réessayer."
+    }
+} while ($true)
 
 $heureDebut = Get-Date
 
@@ -67,12 +88,12 @@ $runspacePool.Open()
 # Boucle principale du script
 while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -lt $dureeArretSecondes) {
     # Lancement des pings en parallèle
-    $runspaces = foreach ($NomHote in $NomsHotes) {
+    $runspaces = foreach ($NomHote in $NomsHotesAccessibles) {
         $powershell = [powershell]::Create().AddScript({
             param($NomHote)
             try {
                 $ping = New-Object System.Net.NetworkInformation.Ping
-                $resultat = $ping.Send($NomHote)
+                $resultat = $ping.Send($NomHote, 1000) # Ajout d'un délai d'expiration de 1000 ms
                 if ($resultat.Status -eq "Success") {
                     $statut = "Success"
                     $tempsAllerRetour = $resultat.RoundtripTime
@@ -90,7 +111,7 @@ while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -
                 "Statut" = $statut
                 "Adresse" = $NomHote
                 "TempsAllerRetour" = $tempsAllerRetour
-                "Date" = (Get-Date -Format o)
+                "Date" = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
             }
 
             return $resultatObj
@@ -111,24 +132,28 @@ while (($dureeArretSecondes -eq 0) -or ((Get-Date) - $heureDebut).TotalSeconds -
         # Traitement des résultats
         $nomHote = $resultat.Adresse
         $donneesHote = $donneesHotes[$nomHote]
-        $donneesHote.Resultats += $resultat
 
-        if ($resultat.Statut -eq "Success") {
-            $donneesHote.LatenceTotale += $resultat.TempsAllerRetour
-            $donneesHote.LatenceMax = [Math]::Max($donneesHote.LatenceMax, $resultat.TempsAllerRetour)
-            $donneesHote.NombrePings++
-        } else {
-            $donneesHote.NombreErreurs++
+        if ($null -ne $donneesHote) {
+            $donneesHote.Resultats += $resultat
+
+            if ($resultat.Statut -eq "Success") {
+                $donneesHote.LatenceTotale += $resultat.TempsAllerRetour
+                $donneesHote.LatenceMax = [Math]::Max($donneesHote.LatenceMax, $resultat.TempsAllerRetour)
+                $donneesHote.NombrePings++
+            } else {
+                $donneesHote.NombreErreurs++
+            }
+
+            if ($donneesHote.NombrePings -gt 0) {
+                $donneesHote.LatenceMoyenne = [Math]::Round($donneesHote.LatenceTotale / $donneesHote.NombrePings)
+            } else {
+                $donneesHote.LatenceMoyenne = 0
+            }
+
+            # Affichage du suivi dans la console
+            $currentTime = Get-Date -Format "HH:mm:ss"
+            Write-Host "Ping to $nomHote at $currentTime : $($resultat.Statut), Roundtrip Time: $($resultat.TempsAllerRetour) ms"
         }
-
-        if ($donneesHote.NombrePings -gt 0) {
-            $donneesHote.LatenceMoyenne = [Math]::Round($donneesHote.LatenceTotale / $donneesHote.NombrePings)
-        } else {
-            $donneesHote.LatenceMoyenne = 0
-        }
-
-        # Affichage du suivi dans la console
-        Write-Host "Ping to $nomHote : $($resultat.Statut), Roundtrip Time: $($resultat.TempsAllerRetour) ms"
     }
 
     # Sauvegarde des données dans le fichier log
