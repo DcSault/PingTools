@@ -1,4 +1,28 @@
-﻿
+﻿<#
+.SYNOPSIS
+Script de ping pour tester la connectivité des hôtes spécifiés.
+
+.DESCRIPTION
+Ce script permet de tester la connectivité des hôtes spécifiés en effectuant des pings en parallèle. Les résultats des pings sont enregistrés dans un fichier log au format JSON. Le script prend en compte la durée d'exécution souhaitée et génère un numéro de dossier aléatoire pour chaque exécution.
+
+.PARAMETER NomsHotes
+Les noms des hôtes à tester. Il peut s'agir d'une ou plusieurs adresses IP ou noms de domaine.
+
+.PARAMETER NumeroDossier
+Le numéro du dossier à traiter. C'est une valeur entière.
+
+.PARAMETER DureeArretSecondes
+La durée de l'arrêt en secondes. C'est une valeur entière qui représente le nombre de secondes pendant lesquelles le script doit être arrêté.
+
+.PARAMETER RepertoireLogs
+Le répertoire dans lequel les fichiers logs seront enregistrés. Par défaut, il s'agit du répertoire "Logs" situé dans le répertoire du script.
+
+.NOTES
+Auteur : V.ROSIQUE
+Version : 2.7.2
+Date : 2024-02-02
+#>
+
 param (
     [Parameter(Mandatory = $true)]
     [string[]] $NomsHotes,
