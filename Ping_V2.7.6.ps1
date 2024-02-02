@@ -19,7 +19,7 @@ Le répertoire dans lequel les fichiers logs seront enregistrés. Par défaut, i
 
 .NOTES
 Auteur : V.ROSIQUE
-Version : 2.7.5
+Version : 2.7.6 - Alpha
 Date : 2024-02-02
 #>
 
@@ -54,15 +54,15 @@ function New-RandomString {
     )
     
     $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    $randomString = ""
+    $randomString = New-Object System.Text.StringBuilder
     
-    for ($i = 1; $i -le $Length; $i++) {
+    for ($i = 0; $i -lt $Length; $i++) {
         $randomIndex = Get-Random -Minimum 0 -Maximum $characters.Length
         $randomChar = $characters[$randomIndex]
-        $randomString += $randomChar
+        $null = $randomString.Insert($i, $randomChar)
     }
     
-    return $randomString
+    return $randomString.ToString()
 }
 
 $nombreAleatoire = New-RandomString -Length 6
